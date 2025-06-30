@@ -1,42 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sharon's Blog
+This is a [Next.js 15](https://nextjs.org) project that allows people to make blog posts that can be viewed by everyone. I created it following a [tutorial](https://www.youtube.com/watch?v=PqxHnMfyCUY) (with a few of my own additions) to improve at Next.js and Typescript. I also submitted it to HackClub's Shipwrecked Bay.
 
+## Live deployment
+NOTE: I don't have any live moderation so anybody can post anything. The link is only available on HackClub's Bay and here so there's probably nothing bad, but proceed with caution. Feel free to add a blog post but please use common sense: keep it appropriate and don't write any sensitive information.
+
+Website: https://blog-rosy-mu-rabca91ieq.vercel.app/
 
 ## Features
-- RSC, image optimization, middleware, server actions,
-- Kinde auth
-- neon db
+- React Server Components
+- App Router
+- Image optimization
+- Protected routes using middleware
+- Server actions for data mutations
+- Authentication using [Kinde](https://kinde.com/)
+- Database using [Neon](https://neon.com/) and [Prisma](https://www.prisma.io/)
+- Animations using [Motion for React](https://motion.dev/)
+- Caching and Streaming for responsive design
 
-## Getting Started
+## Running locally
 
-First, run the development server:
-
+Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/sharonbasovich/blog.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go into the project folder:
+```bash
+cd .\blog\
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Install dependencies:
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the development server:
 
-## Learn More
+```bash
+pnpm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (you will need to set up your own Neon database and Kinde auth and setup a .env for proper functionality). 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

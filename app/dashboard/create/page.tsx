@@ -32,7 +32,7 @@ export default function CreateBlogRoute() {
               <Textarea name="content" required placeholder="Content"/>
             </div>
             <div className="flex flex-col gap-2">
-              <Label>Image URL</Label>
+              <Label>Image URL: Must Be HackClub CDN Link</Label>
               <Input name="url" required type="url" placeholder="Image URL"/>
             </div>
             <Submitbutton />

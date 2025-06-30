@@ -17,6 +17,13 @@ export async function handleSubmission(formData: FormData) {
   const content = formData.get("content");
   const url = formData.get("url");
 
+  const urlPattern = /^https:\/\/hc-cdn\.hel1\.your-objectstorage\.com\/.+$/;
+  if (!urlPattern.test(url as string)) {
+    throw new Error(
+      "Image URL must be from hc-cdn.hel1.your-objectstorage.com"
+    );
+  }
+
   await prisma.blogPost.create({
     data: {
       title: title as string,
