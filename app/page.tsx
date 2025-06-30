@@ -18,6 +18,7 @@ async function getData() {
       authorId: true,
       updatedAt: true,
     },
+    orderBy: { createAt: "desc" },
   });
 
   return data;
@@ -45,4 +46,3 @@ async function BlogPosts() {
     </div>
   );
 }
-
