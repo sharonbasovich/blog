@@ -9,6 +9,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Github } from "lucide-react";
+import { buttonVariants } from "../ui/button";
 
 export function NavBar() {
   const { getUser } = useKindeBrowserClient();

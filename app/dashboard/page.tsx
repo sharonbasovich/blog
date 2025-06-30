@@ -48,7 +48,7 @@ async function BlogPosts() {
 
   if (data.length == 0) {
     return (
-        <h3>You Don't Have Any Posts Yet!</h3>
+        <h3>You Don&apos;t Have Any Posts Yet!</h3>
     );
   }
 
