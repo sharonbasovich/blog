@@ -5,6 +5,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { BlogPostCard } from "@/components/general/BlogPostCard";
 import { Suspense } from "react";
 import { BlogPostsGrid } from "@/components/general/BlogPostsGrid";
+import { redirect } from "next/navigation";
 
 async function getData(userId: string) {
   const data = await prisma.blogPost.findMany({
@@ -40,8 +41,10 @@ export default function dashboardRoute() {
 async function BlogPosts() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-
-  const data = await getData(user?.id);
+  if (user == null) {
+    redirect("/");
+  }
+  const data = await getData(user.id);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
