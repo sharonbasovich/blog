@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
-      new URL("https://placehold.co/600x400.png"),
+      new URL("https://hc-cdn.hel1.your-objectstorage.com/**"),
       new URL("https://lh3.googleusercontent.com/**"),
     ],
   },
