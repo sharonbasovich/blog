@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
+## TO-DO
+- change suspense on home and dashboard (on home it is just a temp paragraph right now)
+
+## Features
+- RSC, image optimization, middleware, server actions,
+- Kinde auth
+- neon db
+
 ## Getting Started
 
 First, run the development server:

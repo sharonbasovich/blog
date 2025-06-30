@@ -5,6 +5,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { BlogPostCard } from "@/components/general/BlogPostCard";
 
 async function getData(userId: string) {
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // for testing streaming only
   const data = await prisma.blogPost.findMany({
     where: {
       authorId: userId,
@@ -35,7 +36,7 @@ export default async function dashboardRoute() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((item) => (
-          <BlogPostCard data={item} key={item.id}/>
+          <BlogPostCard data={item} key={item.id} />
         ))}
       </div>
     </div>
