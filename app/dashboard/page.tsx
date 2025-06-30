@@ -3,6 +3,8 @@ import Link from "next/link";
 import { prisma } from "../utils/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { BlogPostCard } from "@/components/general/BlogPostCard";
+import { Suspense } from "react";
+import { BlogPostsGrid } from "@/components/general/BlogPostsGrid";
 
 async function getData(userId: string) {
   await new Promise((resolve) => setTimeout(resolve, 2000)); // for testing streaming only
@@ -18,12 +20,7 @@ async function getData(userId: string) {
   return data;
 }
 
-export default async function dashboardRoute() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  const data = await getData(user!.id);
-
+export default function dashboardRoute() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -34,11 +31,24 @@ export default async function dashboardRoute() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {data.map((item) => (
-          <BlogPostCard data={item} key={item.id} />
-        ))}
-      </div>
+      <Suspense fallback={<BlogPostsGrid />}>
+        <BlogPosts />
+      </Suspense>
+    </div>
+  );
+}
+
+async function BlogPosts() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  const data = await getData(user!.id);
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {data.map((item) => (
+        <BlogPostCard data={item} key={item.id} />
+      ))}
     </div>
   );
 }
