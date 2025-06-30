@@ -4,8 +4,6 @@ import { Suspense } from "react";
 import { BlogPostsGrid } from "@/components/general/BlogPostsGrid";
 
 async function getData() {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // for testing streaming only
-
   const data = await prisma.blogPost.findMany({
     select: {
       title: true,

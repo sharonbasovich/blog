@@ -7,7 +7,6 @@ import { Suspense } from "react";
 import { BlogPostsGrid } from "@/components/general/BlogPostsGrid";
 
 async function getData(userId: string) {
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // for testing streaming only
   const data = await prisma.blogPost.findMany({
     where: {
       authorId: userId,
@@ -42,7 +41,7 @@ async function BlogPosts() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  const data = await getData(user!.id);
+  const data = await getData(user?.id);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
