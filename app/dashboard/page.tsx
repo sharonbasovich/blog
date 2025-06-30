@@ -46,6 +46,12 @@ async function BlogPosts() {
   }
   const data = await getData(user.id);
 
+  if (data.length == 0) {
+    return (
+        <h3>You Don't Have Any Posts Yet!</h3>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {data.map((item) => (
