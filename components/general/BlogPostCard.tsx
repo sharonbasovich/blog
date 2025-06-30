@@ -40,10 +40,25 @@ export function BlogPostCard({ data }: IappProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="relative size-8 overflow-hidden rounded-full">
-                <Image src={data.authorImage} alt={data.authorName} fill className="object-cover"/>
+                <Image
+                  src={data.authorImage}
+                  alt={data.authorName}
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <p className="text-sm font-medium text-gray-700">{data.authorName}</p>
+              <p className="text-sm font-medium text-gray-700">
+                {data.authorName}
+              </p>
             </div>
+
+            <time className="text-xs text-gray-500">
+              {new Intl.DateTimeFormat("en-us", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }).format(data.createAt)}
+            </time>
           </div>
         </div>
       </Link>
