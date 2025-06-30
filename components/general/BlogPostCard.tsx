@@ -42,6 +42,7 @@ export function BlogPostCard({ data }: IappProps) {
               <div className="relative size-8 overflow-hidden rounded-full">
                 <Image src={data.authorImage} alt={data.authorName} fill className="object-cover"/>
               </div>
+              <p className="text-sm font-medium text-gray-700">{data.authorName}</p>
             </div>
           </div>
         </div>
