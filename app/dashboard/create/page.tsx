@@ -15,6 +15,10 @@ import { Submitbutton } from "@/components/general/Submitbutton";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Mic } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { VariantProps } from "class-variance-authority";
+
+type ButtonVariant = VariantProps<typeof buttonVariants>["variant"];
 
 export default function CreateBlogRoute() {
   const [text, setText] = useState("");
@@ -23,12 +27,12 @@ export default function CreateBlogRoute() {
     setText(e.target.value);
   }, []);
 
-  function RecordButton() {
-    const [recording, setRecording] = useState("");
-    const [buttonVariant, setButtonVariant] = useState("outline");
+  const [buttonVariant, setButtonVariant] = useState<ButtonVariant>("outline");
+  const [recording, setRecording] = useState("");
 
+  function RecordButton() {
     function handleOnRecord() {
-      setRecording("Recording!")
+      setRecording("Recording!");
       setButtonVariant("destructive");
       const SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
