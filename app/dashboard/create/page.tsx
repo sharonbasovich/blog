@@ -24,19 +24,28 @@ export default function CreateBlogRoute() {
   }, []);
 
   function RecordButton() {
+    const [recording, setRecording] = useState("");
+    const [buttonVariant, setButtonVariant] = useState("outline");
+
     function handleOnRecord() {
+      setRecording("Recording!")
+      setButtonVariant("destructive");
       const SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new SpeechRecognition();
       recognition.start();
+      recognition.lang = "en-US";
       recognition.onresult = async function (event) {
         const transcript = event.results[0][0].transcript;
         setText(text + " " + transcript);
+        setButtonVariant("outline");
+        setRecording("");
       };
     }
 
     return (
-      <Button variant={"outline"} onClick={handleOnRecord}>
+      <Button variant={buttonVariant} onClick={handleOnRecord}>
+        {recording}
         <Mic />
       </Button>
     );

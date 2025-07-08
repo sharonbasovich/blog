@@ -1,26 +1,43 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
+let recognition: any = null;
+if ("webkitSpeechRecognition" in window) {
+  recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.lang = "en-US";
+}
 
-// let recognition: any = null;
-// if ("webkitSpeechRecognition" in window) {
-//   recognition = new webkitSpeechRecognition();
-//   recognition.continuous = true;
-//   recognition.lang = "en-US";
-// }
+const useSpeechRecognition = () => {
+  const [text, setText] = useState("");
+  const [isListening, setIsListening] = useState(false);
 
-// const useSpeechRecognition = () => {
-//     const [text, setText] = useState("");
-//     const [isListening, setIsListening] = useState(false);
+  useEffect(() => {
+    if (!recognition) return;
 
-//     useEffect(() => {
-//         if(!recognition) return;
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      console.log(event);
+      recognition.stop();
+      setIsListening(false);
+    };
+  }, []);
 
-//         recognition.onresult = (event) => {
+  const startListening = () => {
+    setText('')
+    setIsListening(true)
+    recognition.start()
+  }
 
-//         }
-//     }, []);
-// };
+  const stopListening = () => {
+    setIsListening(false);
+    recognition.stop();
+  }
 
-// export default useSpeechRecognition;
+  return {
+    text,
+    isListening,
+    startListening,
+    hasRecognitionSupport: !!recognition,
+  }
+};
 
-// UNFINISHED speech recognition component
+export default useSpeechRecognition;
