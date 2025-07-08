@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -10,8 +12,36 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { handleSubmission } from "@/app/actions";
 import { Submitbutton } from "@/components/general/Submitbutton";
+import { useCallback, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Mic } from "lucide-react";
 
 export default function CreateBlogRoute() {
+  const [text, setText] = useState("");
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
+  }, []);
+
+  function RecordButton() {
+    function handleOnRecord() {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.start();
+      recognition.onresult = async function (event) {
+        const transcript = event.results[0][0].transcript;
+        setText(text + " " + transcript);
+      };
+    }
+
+    return (
+      <Button variant={"outline"} onClick={handleOnRecord}>
+        <Mic />
+      </Button>
+    );
+  }
+
   return (
     <div>
       <Card className="max-w-lg mx-auto">
@@ -25,15 +55,24 @@ export default function CreateBlogRoute() {
           <form className="flex flex-col gap-4" action={handleSubmission}>
             <div className="flex flex-col gap-2">
               <Label>Title</Label>
-              <Input name="title" required type="text" placeholder="Title"/>
+              <Input name="title" required type="text" placeholder="Title" />
             </div>
             <div className="flex flex-col gap-2">
-              <Label>Content</Label>
-              <Textarea name="content" required placeholder="Content"/>
+              <Label className="justify-between">
+                Content
+                <RecordButton />
+              </Label>
+              <Textarea
+                value={text}
+                name="content"
+                required
+                placeholder="Content"
+                onChange={onChange}
+              />
             </div>
             <div className="flex flex-col gap-2">
               <Label>Image URL: Must Be HackClub CDN Link</Label>
-              <Input name="url" required type="url" placeholder="Image URL"/>
+              <Input name="url" required type="url" placeholder="Image URL" />
             </div>
             <Submitbutton />
           </form>

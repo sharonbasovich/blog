@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL("https://hc-cdn.hel1.your-objectstorage.com/**"),
       new URL("https://lh3.googleusercontent.com/**"),
+      new URL("https://avatars.githubusercontent.com/u/**"),
+      new URL("https://avatars.githubusercontent.com/u/176337916?v=4"),
     ],
   },
 };

@@ -41,6 +41,3 @@ pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result (you will need to set up your own Neon database and Kinde auth and setup a .env for proper functionality). 
-
-
-
