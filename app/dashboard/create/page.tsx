@@ -15,10 +15,15 @@ import { Submitbutton } from "@/components/general/Submitbutton";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Mic } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
 import { VariantProps } from "class-variance-authority";
+import Summarize from "@/components/general/Summarize";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 
-type ButtonVariant = VariantProps<typeof buttonVariants>["variant"];
+type ButtonVariant = VariantProps<typeof Button>["variant"];
 
 export default function CreateBlogRoute() {
   const [text, setText] = useState("");
@@ -28,29 +33,33 @@ export default function CreateBlogRoute() {
   }, []);
 
   const [buttonVariant, setButtonVariant] = useState<ButtonVariant>("outline");
+  const [aiButtonVariant, setAIButtonVariant] =
+    useState<ButtonVariant>("outline");
+
   const [recording, setRecording] = useState("");
 
-  function RecordButton() {
-    function handleOnRecord() {
-      setRecording("Recording!");
-      setButtonVariant("destructive");
-      const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
-      const recognition = new SpeechRecognition();
-      recognition.start();
-      recognition.lang = "en-US";
-      recognition.onresult = async function (event) {
-        const transcript = event.results[0][0].transcript;
-        setText(text + " " + transcript);
-        setButtonVariant("outline");
-        setRecording("");
-      };
-    }
+  function handleOnRecord() {
+    console.log("clicked");
+    setRecording("Recording!");
+    setButtonVariant("destructive");
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.start();
+    recognition.lang = "en-US";
+    recognition.onresult = async function (event) {
+      const transcript = event.results[0][0].transcript;
+      setText(text + " " + transcript);
+      setButtonVariant("outline");
+      setRecording("");
+    };
+  }
 
+  function RecordButton() {
     return (
-      <Button variant={buttonVariant} onClick={handleOnRecord}>
+      <Button variant={buttonVariant} type="button" onClick={handleOnRecord}>
         {recording}
-        <Mic />
+        <Mic className="size-6" />
       </Button>
     );
   }
@@ -73,7 +82,15 @@ export default function CreateBlogRoute() {
             <div className="flex flex-col gap-2">
               <Label className="justify-between">
                 Content
-                <RecordButton />
+                <div className="flex flex-row gap-3 items-center">
+                  <Summarize onResult={setText} prompt={text} />
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <RecordButton />
+                    </TooltipTrigger>
+                    <TooltipContent>Voice to Text</TooltipContent>
+                  </Tooltip>
+                </div>
               </Label>
               <Textarea
                 value={text}
@@ -87,7 +104,14 @@ export default function CreateBlogRoute() {
               <Label>Image URL: Must Be HackClub CDN Link</Label>
               <Input name="url" required type="url" placeholder="Image URL" />
             </div>
-            <Submitbutton />
+            <div className="inline-block">
+              <Tooltip>
+                <TooltipTrigger>
+                  <Submitbutton />
+                </TooltipTrigger>
+                <TooltipContent side="right">Post To The World!</TooltipContent>
+              </Tooltip>
+            </div>
           </form>
         </CardContent>
       </Card>

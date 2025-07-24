@@ -10,7 +10,7 @@ import {
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Github } from "lucide-react";
 import { buttonVariants } from "../ui/button";
-
+import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 export function NavBar() {
   const { getUser } = useKindeBrowserClient();
   const user = getUser();
@@ -51,9 +51,14 @@ export function NavBar() {
         </div>
 
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.925 }}>
-          <a href="https://github.com/sharonbasovich/blog" target="_blank">
-            <Github />
-          </a>
+          <Tooltip>
+            <TooltipTrigger>
+              <a href="https://github.com/sharonbasovich/blog" target="_blank">
+                <Github />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent side="right"> This website is open source!</TooltipContent>
+          </Tooltip>
         </motion.div>
       </div>
 

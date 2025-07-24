@@ -2,7 +2,7 @@ import { BlogPostCard } from "@/components/general/BlogPostCard";
 import { prisma } from "./utils/db";
 import { Suspense } from "react";
 import { BlogPostsGrid } from "@/components/general/BlogPostsGrid";
-
+import Filter from "@/components/general/Filter";
 export const revalidate = 60;
 
 async function getData() {
@@ -28,6 +28,7 @@ export default function Home() {
   return (
     <div className="py-6">
       <h1 className="text-3xl font-bold tracking-tight mb-8">Latest Posts</h1>
+      <Filter></Filter>
       <Suspense fallback={<BlogPostsGrid />}>
         <BlogPosts />
       </Suspense>
