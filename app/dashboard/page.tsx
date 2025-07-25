@@ -6,7 +6,6 @@ import { BlogPostCard } from "@/components/general/BlogPostCard";
 import { Suspense } from "react";
 import { BlogPostsGrid } from "@/components/general/BlogPostsGrid";
 import { redirect } from "next/navigation";
-import Filter from "@/components/general/Filter";
 import {
   Tooltip,
   TooltipTrigger,
