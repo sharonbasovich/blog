@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
 
-interface GridDistortionProps {
+export interface GridDistortionProps {
   grid?: number;
   mouse?: number;
   strength?: number;
