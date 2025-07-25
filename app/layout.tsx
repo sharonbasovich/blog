@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NavBar } from "@/components/general/NavBar";
 import { AuthProvider } from "@/components/general/AuthProvider";
-
+import GridDistortion from "@/components/general/GridDistortion";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,10 +29,21 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased `}
         >
-          <NavBar />
-          {children}
+          <GridDistortion
+            imageSrc="https://picsum.photos/1920/1080?grayscale"
+            grid={10}
+            mouse={0.1}
+            strength={0.15}
+            relaxation={0.9}
+            className="custom-class fixed inset-0 -z-50 w-full h-full"
+          />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-h-screen">
+            <NavBar />
+            {children}
+          </div>
         </body>
       </html>
     </AuthProvider>
