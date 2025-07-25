@@ -18,7 +18,7 @@ export function NavBar() {
     <motion.nav
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="py-5 flex items-center justify-between mb-3"
+      className="py-5 flex items-center justify-between mb-3 px-4 rounded-md bg-white/80"
     >
       <div className="flex items-center gap-6">
         <Link href="/">
@@ -66,7 +66,7 @@ export function NavBar() {
         <div className="flex items-center gap-4">
           <p>{user.given_name}</p>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.925 }}>
-            <LogoutLink className={buttonVariants({ variant: "secondary" })}>
+            <LogoutLink className={buttonVariants({ variant: "outline" })}>
               Logout
             </LogoutLink>
           </motion.div>
@@ -74,11 +74,10 @@ export function NavBar() {
       ) : (
         <div className="flex items-center gap-4">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.925 }}>
-            {" "}
             <LoginLink className={buttonVariants()}>Login</LoginLink>
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.925 }}>
-            <RegisterLink className={buttonVariants({ variant: "secondary" })}>
+            <RegisterLink className={buttonVariants({ variant: "outline" })}>
               Sign Up
             </RegisterLink>
           </motion.div>

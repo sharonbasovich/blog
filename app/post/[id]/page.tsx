@@ -25,7 +25,7 @@ export default async function IdPage({ params }: { params: Params }) {
   return (
     <div className="max-w-3xl mx-auto py-8 px-4">
       <Link
-        className={buttonVariants({ variant: "secondary" })}
+        className={buttonVariants({ variant: "outline" })}
         href="/"
       >
         Back to posts
