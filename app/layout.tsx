@@ -40,7 +40,7 @@ export default function RootLayout({
             className="custom-class fixed inset-0 -z-50 w-full h-full"
           />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-h-screen">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-h-screen bg-white rounded-md">
             <NavBar />
             {children}
           </div>
