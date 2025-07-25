@@ -22,20 +22,20 @@ export async function handleSubmission(formData: FormData) {
     throw new Error(
       "Image URL must be from hc-cdn.hel1.your-objectstorage.com"
     );
+  } else {
+    await prisma.blogPost.create({
+      data: {
+        title: title as string,
+        content: content as string,
+        imageUrl: url as string,
+        authorId: user.id,
+        authorImage: user.picture as string,
+        authorName: user.given_name as string,
+      },
+    });
+
+    revalidatePath("/");
+
+    return redirect("/dashboard");
   }
-
-  await prisma.blogPost.create({
-    data: {
-      title: title as string,
-      content: content as string,
-      imageUrl: url as string,
-      authorId: user.id,
-      authorImage: user.picture as string,
-      authorName: user.given_name as string,
-    },
-  });
-
-  revalidatePath("/");
-
-  return redirect("/dashboard");
 }

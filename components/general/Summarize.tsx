@@ -2,11 +2,7 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import { VariantProps } from "class-variance-authority";
 import { Bot } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 type SummarizeProps = {
   onResult: (result: string) => void;
   prompt: string;
@@ -41,18 +37,13 @@ export default function Summarize({ onResult, prompt }: SummarizeProps) {
   }
 
   return (
-    <Tooltip>
-      <TooltipTrigger>
-        <Button
-          variant={buttonVariant}
-          onClick={handleClick}
-          disabled={prompt === ""}
-        >
-          <Bot className="size-l" />
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>AI Summary</TooltipContent>
-    </Tooltip>
+    <Button
+      variant={buttonVariant}
+      onClick={handleClick}
+      disabled={prompt === ""}
+    >
+      <Bot className="size-l" />
+    </Button>
   );
 }
 

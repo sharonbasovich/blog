@@ -22,6 +22,8 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 type ButtonVariant = VariantProps<typeof Button>["variant"];
 
@@ -33,7 +35,7 @@ export default function CreateBlogRoute() {
   }, []);
 
   const [buttonVariant, setButtonVariant] = useState<ButtonVariant>("outline");
-    useState<ButtonVariant>("outline");
+  useState<ButtonVariant>("outline");
 
   const [recording, setRecording] = useState("");
 
@@ -73,7 +75,28 @@ export default function CreateBlogRoute() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="flex flex-col gap-4" action={handleSubmission}>
+          <form
+            className="flex flex-col gap-4"
+            // action={handleSubmission}
+            onSubmit={async (e) => {
+              e.preventDefault();
+
+              const formData = new FormData(e.currentTarget);
+              const url = formData.get("url") as string;
+
+              // ✅ Client-side validation
+              if (!url.includes("hc-cdn.hel1.your-objectstorage.com")) {
+                toast(
+                  "Image URL must be from hc-cdn.hel1.your-objectstorage.com"
+                );
+                return; // block submit
+              }
+
+              // ✅ If valid, call the server action
+              await handleSubmission(formData);
+              toast("Post created successfully!");
+            }}
+          >
             <div className="flex flex-col gap-2">
               <Label>Title</Label>
               <Input name="title" required type="text" placeholder="Title" />
@@ -82,9 +105,14 @@ export default function CreateBlogRoute() {
               <Label className="justify-between">
                 Content
                 <div className="flex flex-row gap-3 items-center">
-                  <Summarize onResult={setText} prompt={text} />
                   <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
+                      <Summarize onResult={setText} prompt={text} />
+                    </TooltipTrigger>
+                    <TooltipContent>AI TL;DR Summary</TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
                       <RecordButton />
                     </TooltipTrigger>
                     <TooltipContent>Voice to Text</TooltipContent>
@@ -105,7 +133,7 @@ export default function CreateBlogRoute() {
             </div>
             <div className="inline-block">
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <Submitbutton />
                 </TooltipTrigger>
                 <TooltipContent side="right">Post To The World!</TooltipContent>
@@ -114,6 +142,7 @@ export default function CreateBlogRoute() {
           </form>
         </CardContent>
       </Card>
+      <Toaster />
     </div>
   );
 }
