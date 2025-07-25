@@ -26,13 +26,15 @@ async function getData() {
 
 export default function Home() {
   return (
-    <div className="py-6">
-      <h1 className="text-3xl font-bold tracking-tight mb-8">Latest Posts</h1>
-      <Filter></Filter>
-      <Suspense fallback={<BlogPostsGrid />}>
-        <BlogPosts />
-      </Suspense>
-    </div>
+    <>
+      {/* <Filter></Filter> */}
+      <div className="py-6">
+        <h1 className="text-3xl font-bold tracking-tight mb-8">Latest Posts</h1>
+        <Suspense fallback={<BlogPostsGrid />}>
+          <BlogPosts />
+        </Suspense>
+      </div>
+    </>
   );
 }
 

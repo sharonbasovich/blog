@@ -6,6 +6,12 @@ import { BlogPostCard } from "@/components/general/BlogPostCard";
 import { Suspense } from "react";
 import { BlogPostsGrid } from "@/components/general/BlogPostsGrid";
 import { redirect } from "next/navigation";
+import Filter from "@/components/general/Filter";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 
 async function getData(userId: string) {
   const data = await prisma.blogPost.findMany({
@@ -24,11 +30,18 @@ export default function dashboardRoute() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
+        {/* <Filter></Filter> */}
         <h2 className="text-xl font-medium">Your Blog Articles</h2>
-
-        <Link className={buttonVariants()} href="/dashboard/create">
-          Create Post
-        </Link>
+        <Tooltip>
+          <TooltipTrigger>
+            <Link className={buttonVariants()} href="/dashboard/create">
+              Create Post
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            Create a post!
+          </TooltipContent>
+        </Tooltip>
       </div>
 
       <Suspense fallback={<BlogPostsGrid />}>

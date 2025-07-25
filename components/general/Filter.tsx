@@ -5,10 +5,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+// breaks ui rn to be fixed
 export default function Filter() {
   return (
     <>
-        {/* <Select>
+      {/* <Select>
           <SelectTrigger>
             <SelectValue placeholder="Filter"></SelectValue>
           </SelectTrigger>
@@ -16,7 +18,18 @@ export default function Filter() {
             <SelectItem value="system">Newest</SelectItem>
           </SelectContent>
         </Select> */}
-        
+      <div className="relative">
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder="Theme" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="light">Light</SelectItem>
+            <SelectItem value="dark">Dark</SelectItem>
+            <SelectItem value="system">System</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </>
   );
 }
