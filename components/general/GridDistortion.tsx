@@ -162,8 +162,9 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
       });
     };
 
-    container.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mouseleave", handleMouseLeave);
+    // Listen on window instead of container
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("resize", handleResize);
     handleResize();
 
@@ -200,8 +201,9 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
     animate();
 
     return () => {
-      container.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mouseleave", handleMouseLeave);
+      // Remove listeners from window
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("resize", handleResize);
       renderer.dispose();
       geometry.dispose();
@@ -214,7 +216,7 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`w-full h-full overflow-hidden ${className}`}
+      className={`w-full h-full overflow-hidden ${className} pointer-events-none`}
     />
   );
 };

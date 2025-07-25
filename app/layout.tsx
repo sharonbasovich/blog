@@ -33,14 +33,14 @@ export default function RootLayout({
         >
           <GridDistortion
             imageSrc="https://picsum.photos/1920/1080?grayscale"
-            grid={10}
+            grid={80}
             mouse={0.1}
             strength={0.15}
             relaxation={0.9}
-            className="custom-class fixed inset-0 -z-50 w-full h-full"
+            className="custom-class fixed inset-0 -z-50 w-full h-full pointer-events-none"
           />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-h-screen bg-white rounded-md">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-h-screen bg-white/40 rounded-md">
             <NavBar />
             {children}
           </div>
