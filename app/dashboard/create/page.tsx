@@ -33,7 +33,6 @@ export default function CreateBlogRoute() {
   }, []);
 
   const [buttonVariant, setButtonVariant] = useState<ButtonVariant>("outline");
-  const [aiButtonVariant, setAIButtonVariant] =
     useState<ButtonVariant>("outline");
 
   const [recording, setRecording] = useState("");
